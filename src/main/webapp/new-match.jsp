@@ -1,3 +1,6 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -33,7 +36,7 @@
             <h1>Start new match</h1>
             <div class="new-match-image"></div>
             <div class="form-container center">
-                <form method="post" action="#">
+                <form method="post" action="${pageContext.request.contextPath}/new-match">
                     <p style="color: red;">Sample error message</p>
                     <label class="label-player" for="playerOne">Player one</label>
                     <input class="input-player" placeholder="Name" type="text" id="playerOne"
