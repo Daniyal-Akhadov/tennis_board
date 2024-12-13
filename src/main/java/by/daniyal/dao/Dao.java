@@ -1,11 +1,13 @@
 package by.daniyal.dao;
 
+import java.util.Optional;
+
 public interface Dao<Type, Index> {
     Type save(Type model);
 
-    Type update(Type model);
+    boolean update(Type model);
 
-    Type delete(Type model);
+    boolean delete(Type model);
 
-    Type find(Index id);
+    Optional<Type> find(Index id);
 }

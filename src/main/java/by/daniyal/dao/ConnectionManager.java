@@ -10,7 +10,7 @@ import java.sql.Connection;
 @UtilityClass
 public final class ConnectionManager {
     private static final HikariDataSource hikariDataSource;
-    private static final String DRIVER = "org.sqlite.JDBC";
+    private static final String DRIVER = "org.postgresql.Driver";
     private static final String URL = "jdbc:postgresql://localhost:5432/tennis_board";
 
     static {
@@ -27,6 +27,8 @@ public final class ConnectionManager {
         HikariConfig config = new HikariConfig();
         config.setDriverClassName(DRIVER);
         config.setJdbcUrl(URL);
+        config.setUsername("postgres");
+        config.setPassword("postgres");
         return config;
     }
 }
