@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -24,8 +26,8 @@
         </div>
         <div>
             <nav class="nav-links">
-                <a class="nav-link" href="#">Home</a>
-                <a class="nav-link" href="#">Matches</a>
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="matches.html">Matches</a>
             </nav>
         </div>
     </section>
@@ -46,7 +48,7 @@
                 </thead>
                 <tbody>
                 <tr class="player1">
-                    <td class="table-text">Rafael Nadal</td>
+                    <td class="table-text">${requestScope.first.name}</td>
                     <td class="table-text">2</td>
                     <td class="table-text">4</td>
                     <td class="table-text">40</td>
@@ -55,7 +57,7 @@
                     </td>
                 </tr>
                 <tr class="player2">
-                    <td class="table-text">Roger Federer</td>
+                    <td class="table-text">${requestScope.second.name}</td>
                     <td class="table-text">2</td>
                     <td class="table-text">3</td>
                     <td class="table-text">15</td>
@@ -70,7 +72,8 @@
 </main>
 <footer>
     <div class="footer">
-        <p>&copy; Tennis Scoreboard, project from <a href="https://zhukovsd.github.io/java-backend-learning-course/">zhukovsd/java-backend-learning-course</a> roadmap.</p>
+        <p>&copy; Tennis Scoreboard, project from <a href="https://zhukovsd.github.io/java-backend-learning-course/">zhukovsd/java-backend-learning-course</a>
+            roadmap.</p>
     </div>
 </footer>
 </body>
