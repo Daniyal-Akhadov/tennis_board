@@ -24,8 +24,8 @@
         </div>
         <div>
             <nav class="nav-links">
-                <a class="nav-link" href="#">Home</a>
-                <a class="nav-link" href="#">Matches</a>
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="matches">Matches</a>
             </nav>
         </div>
     </section>
@@ -37,7 +37,7 @@
             <div class="new-match-image"></div>
             <div class="form-container center">
                 <form method="post" action="${pageContext.request.contextPath}/new-match">
-                    <p style="color: red;">Sample error message</p>
+<%--                    <p style="color: red;">Sample error message</p>--%>
                     <label class="label-player" for="playerOne">Player one</label>
                     <input class="input-player" placeholder="Name" type="text" id="playerOne"
                            name="playerOne" pattern="[A-Za-z]\. [A-Za-z]+" required
@@ -54,7 +54,8 @@
 </main>
 <footer>
     <div class="footer">
-        <p>&copy; Tennis Scoreboard, project from <a href="https://zhukovsd.github.io/java-backend-learning-course/">zhukovsd/java-backend-learning-course</a> roadmap.</p>
+        <p>&copy; Tennis Scoreboard, project from <a href="https://zhukovsd.github.io/java-backend-learning-course/">zhukovsd/java-backend-learning-course</a>
+            roadmap.</p>
     </div>
 </footer>
 </body>

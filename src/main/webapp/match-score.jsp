@@ -27,7 +27,7 @@
         <div>
             <nav class="nav-links">
                 <a class="nav-link" href="index.html">Home</a>
-                <a class="nav-link" href="matches.html">Matches</a>
+                <a class="nav-link" href="matches.jsp">Matches</a>
             </nav>
         </div>
     </section>
@@ -48,21 +48,46 @@
                 </thead>
                 <tbody>
                 <tr class="player1">
-                    <td class="table-text">${requestScope.first.name}</td>
-                    <td class="table-text">2</td>
-                    <td class="table-text">4</td>
-                    <td class="table-text">40</td>
+                    <td class="table-text">${requestScope.match.first.name}</td>
                     <td class="table-text">
-                        <div class="score-btn">Score</div>
+                        ${requestScope.score.set.firstPlayerPoints != null ? requestScope.score.set.firstPlayerPoints : 0}
+                    </td>
+                    <td class="table-text">
+                        ${requestScope.score.game.firstPlayerPoints != null ? requestScope.score.game.firstPlayerPoints : 0}
+                    </td>
+                    <td class="table-text">
+                        ${requestScope.score.draw.firstPlayerPoints != null ? requestScope.score.draw.firstPlayerPoints : 0}
+                    </td>
+                    <td class="table-text">
+                        <div class="score-btn">
+                            <form method="post"
+                                  action="${pageContext.request.contextPath}/match-score?uuid=${param.uuid}">
+                                <input type="hidden" name="player" value="${requestScope.match.first.name}">
+                                <input class="form-button" type="submit" value="Score">
+                            </form>
+                        </div>
                     </td>
                 </tr>
+
                 <tr class="player2">
-                    <td class="table-text">${requestScope.second.name}</td>
-                    <td class="table-text">2</td>
-                    <td class="table-text">3</td>
-                    <td class="table-text">15</td>
+                    <td class="table-text">${requestScope.match.second.name}</td>
                     <td class="table-text">
-                        <div class="score-btn">Score</div>
+                        ${requestScope.score.set.secondPlayerPoints != null ? requestScope.score.set.secondPlayerPoints : 0}
+                    </td>
+                    <td class="table-text">
+                        ${requestScope.score.game.secondPlayerPoints != null ? requestScope.score.game.secondPlayerPoints : 0}
+                    </td>
+                    <td class="table-text">
+                        ${requestScope.score.draw.secondPlayerPoints != null ? requestScope.score.draw.secondPlayerPoints : 0}
+                    </td>
+                    <td class="table-text">
+                        <div class="score-btn">
+                            <form method="post"
+                                  action="${pageContext.request.contextPath}/match-score?uuid=${param.uuid}">
+                                <input type="hidden" name="player" value="${requestScope.match.second.name}">
+                                <input class="form-button" type="submit" value="Score">
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 </tbody>
