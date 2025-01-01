@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -25,8 +26,8 @@
         </div>
         <div>
             <nav class="nav-links">
-                <a class="nav-link" href="index.html">Home</a>
-                <a class="nav-link" href="matches">Matches</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/index.html">Home</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/matches">Matches</a>
             </nav>
         </div>
     </section>
@@ -35,13 +36,13 @@
     <div class="container">
         <h1>Matches</h1>
         <div class="input-container">
-            <form action="/matches" method="get">
+            <form action="${pageContext.request.contextPath}/matches" method="get">
                 <input name="filter_by_player_name" class="input-filter" placeholder="Filter by name" type="text"
                        required/>
             </form>
 
             <div>
-                <a href="/matches">
+                <a href="${pageContext.request.contextPath}/matches">
                     <button class="btn-filter">Reset Filter</button>
                 </a>
             </div>
@@ -65,7 +66,7 @@
         <div class="pagination">
             <c:if test="${requestScope.pageRequest.hasPrevious()}">
                 <a class="prev"
-                   href="http://localhost:8080/matches?page=${requestScope.pageRequest.previousPage}">&lt;</a>
+                   href="${pageContext.request.contextPath}/matches?page=${requestScope.pageRequest.previousPage}">&lt;</a>
             </c:if>
 
             <c:set var="currentPage" value="${requestScope.pageRequest.page}"/>
@@ -85,12 +86,13 @@
             <c:forEach var="i" begin="${startPage}" end="${endPage}">
                 <c:if test="${i < totalPages}">
                     <a class="num-page ${i == currentPage ? 'current' : ''}"
-                       href="http://localhost:8080/matches?page=${i}">${i + 1}</a>
+                       href="${pageContext.request.contextPath}/matches?page=${i}">${i + 1}</a>
                 </c:if>
             </c:forEach>
 
             <c:if test="${requestScope.pageRequest.hasNext()}">
-                <a class="next" href="http://localhost:8080/matches?page=${requestScope.pageRequest.page + 1}">&gt;</a>
+                <a class="next"
+                   href="${pageContext.request.contextPath}/matches?page=${requestScope.pageRequest.page + 1}">&gt;</a>
             </c:if>
         </div>
     </div>

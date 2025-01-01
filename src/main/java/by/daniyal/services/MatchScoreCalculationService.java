@@ -11,7 +11,7 @@ import static java.lang.Math.abs;
 
 public class MatchScoreCalculationService {
 
-    public static final int VALUE_TO_REACHED_SET_WITHOUT_ADVANTAGE = 6;
+    public static final int VALUE_TO_REACHED_SET_WITHOUT_ADVANTAGE = 7;
     public static final int POINTS_TO_WIN_SET = 2;
     public static final int POINTS_FOR_STARTING_TIE_BREAK = 6;
 
@@ -21,6 +21,7 @@ public class MatchScoreCalculationService {
     private final Set set;
     private final Game game;
     private final Draw draw;
+
     private final TieBreak tieBreak;
 
     @Getter
@@ -62,6 +63,10 @@ public class MatchScoreCalculationService {
 
         Score result = new Score(draw, game, set);
         return Optional.of(result);
+    }
+
+    public Score getScore() {
+        return new Score(draw, game, set);
     }
 
     private void handleSet() {

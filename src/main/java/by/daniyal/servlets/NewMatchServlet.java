@@ -24,9 +24,7 @@ public class NewMatchServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request
-                .getRequestDispatcher(NEW_MATCH_JSP)
-                .forward(request, response);
+        response.sendRedirect(NEW_MATCH_JSP);
     }
 
     @Override
@@ -43,7 +41,9 @@ public class NewMatchServlet extends HttpServlet {
         Match match = new Match(1L, firstPlayer, secondPlayer, null);
         UUID uuid = UUID.randomUUID();
         ongoingMatchesService.save(uuid, match);
-
+        System.out.println(uuid);
+        request.getSession().setAttribute("match", match);
+        request.getSession().setAttribute("uuid", uuid);
         response.sendRedirect(formatedMatchScoreJspRequest(uuid));
     }
 

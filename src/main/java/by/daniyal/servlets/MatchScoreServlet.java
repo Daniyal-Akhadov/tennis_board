@@ -6,7 +6,6 @@ import by.daniyal.entity.Player;
 import by.daniyal.services.MatchScoreCalculationService;
 import by.daniyal.services.OngoingMatchesService;
 import by.daniyal.services.calculation_score.Score;
-import by.daniyal.util.Logger;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,7 +21,7 @@ import java.util.UUID;
 @WebServlet(name = "match-score", urlPatterns = "/match-score")
 public class MatchScoreServlet extends HttpServlet {
 
-    private static final String MATCH_SCORE_JSP = "match-score.jsp";
+    private static final String MATCH_SCORE_JSP = "match-score.jsp?uuid=%s&player=%s";
     private static final String MATCHES_SERVLET = "/matches";
 
     private final OngoingMatchesService ongoingMatchesService = OngoingMatchesService.INSTANCE;
@@ -33,24 +32,27 @@ public class MatchScoreServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uuid = request.getParameter("uuid");
+        String player = request.getParameter("player");
+        System.out.println(uuid);
         Optional<Match> matchOptional = ongoingMatchesService.find(UUID.fromString(uuid));
         Match match = matchOptional.orElseThrow(NoSuchElementException::new);
-        request.setAttribute("match", match);
-        request.setAttribute("uuid", uuid);
+        request.getSession().setAttribute("match", match);
+        request.getSession().setAttribute("uuid", uuid);
+        System.out.println(match);
         matchScoreCalculationService = new MatchScoreCalculationService(match.getFirst(), match.getSecond());
-        request.getRequestDispatcher(MATCH_SCORE_JSP).forward(request, response);
+        Match attribute = (Match) request.getSession().getAttribute("match");
+        System.out.println(attribute);
+        response.sendRedirect(formatedMatchScoreJspRequest(UUID.fromString(uuid), player));
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uuid = request.getParameter("uuid");
         String player = request.getParameter("player");
+        System.out.println(uuid);
 
         Optional<Match> matchOptional = ongoingMatchesService.find(UUID.fromString(uuid));
         Match match = matchOptional.orElseThrow(NoSuchElementException::new);
-
-        Logger.log("Match found: " + match);
-        Logger.log("Player found: " + player);
         Player winner = defineWinner(match, player);
         match.setWinner(winner);
 
@@ -76,8 +78,8 @@ public class MatchScoreServlet extends HttpServlet {
 
     @SneakyThrows
     private void handleScore(HttpServletRequest request, HttpServletResponse response, Score score, Match match) {
-        request.setAttribute("score", score);
-        request.setAttribute("match", match);
+        MatchScoreDto matchScoreDto = new MatchScoreDto(score, match);
+        request.setAttribute("matchScoreDto", matchScoreDto);
         request.getRequestDispatcher(MATCH_SCORE_JSP).forward(request, response);
     }
 
@@ -92,6 +94,10 @@ public class MatchScoreServlet extends HttpServlet {
             winner = second;
         }
         return winner;
+    }
+
+    private static String formatedMatchScoreJspRequest(UUID uuid, String player) {
+        return MATCH_SCORE_JSP.formatted(uuid.toString(), player);
     }
 }
 

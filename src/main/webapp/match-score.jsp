@@ -48,21 +48,22 @@
                 </thead>
                 <tbody>
                 <tr class="player1">
-                    <td class="table-text">${requestScope.match.first.name}</td>
+                    <td class="table-text">${sessionScope.match.first.name}</td>
                     <td class="table-text">
-                        ${requestScope.score.set.firstPlayerPoints != null ? requestScope.score.set.firstPlayerPoints : 0}
+                        ${requestScope.matchScoreDto.score.set.firstPlayerPoints != null ? requestScope.matchScoreDto.score.set.firstPlayerPoints : 0}
                     </td>
                     <td class="table-text">
-                        ${requestScope.score.game.firstPlayerPoints != null ? requestScope.score.game.firstPlayerPoints : 0}
+                        ${requestScope.matchScoreDto.score.game.firstPlayerPoints != null ? requestScope.matchScoreDto.score.game.firstPlayerPoints : 0}
                     </td>
                     <td class="table-text">
-                        ${requestScope.score.draw.firstPlayerPoints != null ? requestScope.score.draw.firstPlayerPoints : 0}
+                        ${requestScope.matchScoreDto.score.draw.firstPlayerPoints != null ? requestScope.matchScoreDto.score.draw.firstPlayerPoints : 0}
                     </td>
                     <td class="table-text">
                         <div class="score-btn">
                             <form method="post"
-                                  action="${pageContext.request.contextPath}/match-score?uuid=${param.uuid}">
-                                <input type="hidden" name="player" value="${requestScope.match.first.name}">
+                                  action="${pageContext.request.contextPath}/match-score?uuid=${param.uuid}&player=${sessionScope.match.first.name}">
+                                <input type="hidden" name="player"
+                                       value="${sessionScope.match.first.name}">
                                 <input class="form-button" type="submit" value="Score">
                             </form>
                         </div>
@@ -70,21 +71,22 @@
                 </tr>
 
                 <tr class="player2">
-                    <td class="table-text">${requestScope.match.second.name}</td>
+                    <td class="table-text">${sessionScope.match.second.name}</td>
                     <td class="table-text">
-                        ${requestScope.score.set.secondPlayerPoints != null ? requestScope.score.set.secondPlayerPoints : 0}
+                        ${requestScope.matchScoreDto.score.set.secondPlayerPoints != null ? requestScope.matchScoreDto.score.set.secondPlayerPoints : 0}
                     </td>
                     <td class="table-text">
-                        ${requestScope.score.game.secondPlayerPoints != null ? requestScope.score.game.secondPlayerPoints : 0}
+                        ${requestScope.matchScoreDto.score.game.secondPlayerPoints != null ? requestScope.matchScoreDto.score.game.secondPlayerPoints : 0}
                     </td>
                     <td class="table-text">
-                        ${requestScope.score.draw.secondPlayerPoints != null ? requestScope.score.draw.secondPlayerPoints : 0}
+                        ${requestScope.matchScoreDto.score.draw.secondPlayerPoints != null ? requestScope.matchScoreDto.score.draw.secondPlayerPoints : 0}
                     </td>
                     <td class="table-text">
                         <div class="score-btn">
                             <form method="post"
-                                  action="${pageContext.request.contextPath}/match-score?uuid=${param.uuid}">
-                                <input type="hidden" name="player" value="${requestScope.match.second.name}">
+                                  action="${pageContext.request.contextPath}/match-score?uuid=${param.uuid}&player=${sessionScope.match.second.name}">
+                                <input type="hidden" name="player"
+                                       value="${sessionScope.match.second.name}">
                                 <input class="form-button" type="submit" value="Score">
                             </form>
                         </div>
