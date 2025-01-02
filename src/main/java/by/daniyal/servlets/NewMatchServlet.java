@@ -16,15 +16,16 @@ import java.util.UUID;
 @WebServlet(name = "new-match", urlPatterns = "/new-match")
 public class NewMatchServlet extends HttpServlet {
 
-    public static final String NEW_MATCH_JSP = "new-match.jsp";
-    public static final String MATCH_SCORE_BY_UUID_JSP = "/match-score?uuid=%s";
+    public static final String NEW_MATCH_JSP = "new-matchh.jsp";
+    public static final String MATCH_SCORE_BY_UUID_JSP = "match-score?uuid=%s";
+
 
     private static final PlayerDao playerDao = PlayerDao.INSTANCE;
     private static final OngoingMatchesService ongoingMatchesService = OngoingMatchesService.INSTANCE;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect(NEW_MATCH_JSP);
+        request.getRequestDispatcher(NEW_MATCH_JSP).forward(request, response);
     }
 
     @Override
